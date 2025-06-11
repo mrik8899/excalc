@@ -115,10 +115,10 @@ const InputField: React.FC<InputFieldProps> = ({ label, value, onChange, placeho
         onBlur={handleBlur}
         placeholder={placeholder}
         inputMode="decimal"
-        className={`w-full text-right px-2 py-1 bg-transparent border-b-2 text-xl font-medium transition-all duration-200 focus:outline-none focus:ring-0
+        className={`w-full text-right px-2 py-1 bg-transparent border-b-2 rounded text-xl font-medium transition-colors duration-200 focus:outline-none focus:shadow-md focus:border-blue-500
           ${darkMode 
-            ? 'border-gray-500 text-gray-100 placeholder-gray-300 focus:border-blue-400'
-            : 'border-gray-400 text-gray-800 placeholder-gray-400 focus:border-indigo-600'
+            ? 'border-gray-500 text-gray-100 placeholder-gray-400 placeholder:text-sm focus:border-blue-400'
+            : 'border-gray-400 text-gray-800 placeholder-gray-400 placeholder:text-sm focus:border-indigo-600'
           }`}
       />
     </div>
@@ -228,18 +228,19 @@ export default function CurrencyConverterApp() {
               </span>
             </div>
             <div className="flex flex-wrap justify-evenly items-baseline gap-x-8 gap-y-4"> 
+        
               <InputField
                 label="PKR Amount"
                 value={pkrAmount1}
                 onChange={setPkrAmount1}
-                placeholder="e.g., 10,000"
+                placeholder=" 50,000"
                 darkMode={darkMode}
               />
               <InputField
-                label="PHP Rate (per PKR)"
+                label="Rate "
                 value={rate1}
                 onChange={setRate1}
-                placeholder="e.g., 4.80"
+                placeholder=" 4.80"
                 darkMode={darkMode}
               />
               <ResultDisplay label="Result (PHP)" value={pkrToPhpResult} decimals={0} darkMode={darkMode} />
@@ -263,14 +264,14 @@ export default function CurrencyConverterApp() {
                 label="PHP Amount"
                 value={phpAmount1}
                 onChange={setPhpAmount1}
-                placeholder="e.g., 10,000"
+                placeholder=" 10,000"
                 darkMode={darkMode}
               />
               <InputField
-                label="PKR Rate (per PHP)"
+                label="Rate "
                 value={rate2}
                 onChange={setRate2}
-                placeholder="e.g., 4.80"
+                placeholder=" 4.80"
                 darkMode={darkMode}
               />
               <ResultDisplay label="Result (PKR)" value={phpToPkrResult} decimals={0} darkMode={darkMode} />
@@ -296,17 +297,17 @@ export default function CurrencyConverterApp() {
               label="PKR Amount"
               value={pkrAmount2}
               onChange={setPkrAmount2}
-              placeholder="e.g., 50,000"
+              placeholder=" 50,000"
               darkMode={darkMode}
             />
             <InputField
               label="PHP Amount"
               value={phpAmount2}
               onChange={setPhpAmount2}
-              placeholder="e.g., 10,000"
+              placeholder=" 10,000"
               darkMode={darkMode}
             />
-            <ResultDisplay label="Rate (PKR / PHP)" value={directPkrPhpRate} decimals={4} darkMode={darkMode} />
+            <ResultDisplay label="Rate (PKR / PHP)" value={directPkrPhpRate} decimals={2} darkMode={darkMode} />
           </div>
         </section>
 
@@ -327,17 +328,17 @@ export default function CurrencyConverterApp() {
               label="USD to PKR Rate"
               value={usdPkrRate}
               onChange={setUsdPkrRate}
-              placeholder="e.g., 283.10"
+              placeholder=" 283.10"
               darkMode={darkMode}
             />
             <InputField
               label="USD to PHP Rate"
               value={usdPhpRate}
               onChange={setUsdPhpRate}
-              placeholder="e.g., 55.90"
+              placeholder=" 55.90"
               darkMode={darkMode}
             />
-            <ResultDisplay label="Rate (PKR/PHP via USD)" value={crossUsdRate} decimals={4} darkMode={darkMode} />
+            <ResultDisplay label="Rate (PKR/PHP via USD)" value={crossUsdRate} decimals={2} darkMode={darkMode} />
           </div>
         </section>
 
