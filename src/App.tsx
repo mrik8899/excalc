@@ -163,25 +163,30 @@ export default function CurrencyConverterApp() {
   const [usdPhpRate, setUsdPhpRate] = useState<string>('');
 
   // Set initial dark mode based on system preference (optional)
-  useEffect(() => {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
+ useEffect(() => {
+  const savedPreference = localStorage.getItem('darkMode');
+
+  if (savedPreference !== null) {
+    const isDark = savedPreference === 'true';
+    setDarkMode(isDark);
+    document.documentElement.classList.toggle('dark', isDark);
+  } else {
+    // No saved preference — fallback to system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setDarkMode(prefersDark);
+    document.documentElement.classList.toggle('dark', prefersDark);
+  }
+}, []);
 
   // Toggle Dark Mode and apply/remove 'dark' class to html element
-  const toggleDarkMode = () => {
-    setDarkMode(prevMode => {
-      const newMode = !prevMode;
-      if (newMode) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      return newMode;
-    });
-  };
+const toggleDarkMode = () => {
+  setDarkMode(prev => {
+    const newValue = !prev;
+    localStorage.setItem('darkMode', String(newValue));
+    document.documentElement.classList.toggle('dark', newValue);
+    return newValue;
+  });
+};
 
   // Calculations
   const pkrToPhpResult = rate1 && pkrAmount1 && !isNaN(parseFloat(pkrAmount1)) && !isNaN(parseFloat(rate1)) ? parseFloat(pkrAmount1) / parseFloat(rate1) : 0;
